@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    --prm : #27374D;
+    --sec : #526D82;
+    --text : #9DB2BF;
+    --text-h : #DDE6ED;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Ysabeau+SC:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+.font-sc{
+    font-family: 'Ysabeau SC', sans-serif;
+}
+
+.font-ubuntu{
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.nav-drawer{
+    @apply bg-[--prm] text-white w-[31vw] h-[100vh] fixed left-0 top-0 p-2 flex flex-col space-y-5
+}
+
+.login-form{
+    @apply w-[31vw] h-[100vh] bg-[--prm] flex  justify-center items-center
+}
+
+.profile-pic{
+    @apply w-[6vmin] h-[6vmin] rounded-[50%]
+}
+
+.contact-card{
+    @apply w-[100%] h-[100%] flex items-center p-1 space-x-3 bg-[--prm] border-b-[--sec] border-b-[1px] hover:bg-[--sec] hover:cursor-pointer
+}
+
+.input-field-antd{
+    @apply  text-[--text-h] placeholder:text-[--text] bg-transparent outline-none border-t-0 rounded-none w-[15vmax] h-[5vmin] border-l-0 border-r-0 focus:outline-none
+}
+
+#app-bg{
+    background-image: url('./assets/app-bg.jpg');
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
