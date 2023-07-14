@@ -6,6 +6,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node server/server.js"
   },
+  "engines": {
+    "node": ">=14.20.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sahil-Makhija/Chit-Chat.git"
