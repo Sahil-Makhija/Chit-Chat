@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Sahil-Makhija/Chit-Chat/issues"
   },
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "node": "^20.4.0"
+  }
 }
