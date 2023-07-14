@@ -3,7 +3,7 @@
 import axios from "axios"
 import Cookies from "js-cookie"
 
-export const ENDPOINT = 'http://127.0.0.1:4000'
+export const ENDPOINT = 'http://127.0.0.1:4001'
 
 export const signUp = async (dispatch, values) => {
     dispatch({ type: 'NOW_LOADING' })

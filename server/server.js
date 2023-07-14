@@ -1,7 +1,6 @@
 const express = require('express');
 const { userRoutes, convoRoutes, messageRoutes } = require('./routes')
 const cors = require('cors');
-const dotenv = require('dotenv');
 const fileUpload = require('express-fileupload')
 const connectToDatabase = require('./database');
 const { PORT, SERVER_URL, FRONTEND_URL } = process.env
@@ -14,7 +13,6 @@ cloudinary.config({
   api_secret: 'cxsRST_gEzei9RJkPjw_r4BoASY'
 });
 
-dotenv.config()
 connectToDatabase()
 const app = express()
 
