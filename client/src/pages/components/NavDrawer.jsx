@@ -32,8 +32,7 @@ const NavDrawer = () => {
 
 
     const navigate = useNavigate()
-    const loading = false
-
+    const [loading,setLoading] = useState(false)
     return (
         <div className='nav-drawer'>
             <FriendRequest hidden={requests} />
@@ -101,7 +100,7 @@ const NavDrawer = () => {
                                     return true ? m.email !== email :false
                                 })[0]?.username) }
                             })
-                        }} variant='rectangular' className='  w-[100%] h-[10vmin] rounded-none'>
+                        }} variant='rectangular' className='my-1  w-[100%] h-[10vmin] rounded-none'>
                             {loading && (<Skeleton width={'100%'} height={'100%'} variant='rounded' />)}
                             {!loading && (
                                 <div className='contact-card '>
@@ -120,7 +119,6 @@ const NavDrawer = () => {
                     })}
             </div>
         </div>
-
     )
 }
 

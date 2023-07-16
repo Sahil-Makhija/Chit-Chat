@@ -3,7 +3,7 @@
 import axios from "axios"
 import Cookies from "js-cookie"
 
-export const ENDPOINT = 'http://127.0.0.1:4001'
+export const ENDPOINT = 'http://127.0.0.1:4000'
 
 export const signUp = async (dispatch, values) => {
     dispatch({ type: 'NOW_LOADING' })
@@ -94,5 +94,14 @@ export const fetchMessages = async(chatID)=>{
     }).catch((error)=>{
         console.log(error);
         return []
+    })
+}
+
+export const handleRequest = async(data) =>{
+    console.log(data);
+    return await axios.post(ENDPOINT+'/accept/request',data).then((response)=>{
+        return response.data
+    }).catch((error)=>{
+        return error
     })
 }

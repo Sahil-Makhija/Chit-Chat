@@ -8,9 +8,7 @@ const Image = () => {
 
 
   return (
-    <>
     <Avatar className='profile-pic' src={profilePicture || image} alt='' />
-    </>
 
   )
 }

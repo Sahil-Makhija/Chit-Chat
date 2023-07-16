@@ -26,6 +26,7 @@ router.post('/send/request',async(req,res)=>{
 })
 
 router.post('/accept/request',async(req,res)=>{
+      // console.log(req.body);
       let response  = await acceptRequest(req.body)
       res.json(response)
 })

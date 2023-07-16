@@ -3,21 +3,59 @@ import { Button } from '@mui/material'
 import React, { useState } from 'react'
 import { sendMessage } from '../../ChatConfig';
 import { useSelector } from 'react-redux';
-import {  Input, Modal, Tag } from 'antd';
+import { Input, Modal, Tag } from 'antd';
 import Img from './Image'
 import { handleFile } from '../../redux/actions/userActions';
 
 
+
+
 const InputField = () => {
+
     const [input, setInput] = useState('')
-    const [type, setType] = useState('text')
     const [modal, setModal] = useState(false)
     const [tagged, setTagged] = useState([])
     const [membersModal, setMembersModal] = useState(false)
-    const [file,setFile] = useState(null)
+    const [file, setFile] = useState(null)
+    const [type,setType] =useState('text')
 
     const { username, email } = useSelector(state => state.user)
     const { _id, members } = useSelector(state => state.chat)
+
+    const InputButtons = () => {
+    
+        return <>
+            <Button style={{ backgroundColor: type === 'text' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('text') }} >
+                <TextFields sx={{ color: 'white' }} />
+            </Button>
+            <Button style={{ backgroundColor: type === 'bold' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('bold') }}>
+                <FormatBold sx={{ color: 'white' }} />
+            </Button>
+            <Button style={{ backgroundColor: type === 'italics' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('italics') }}>
+                <FormatItalic sx={{ color: 'white' }} />
+            </Button>
+            <Button style={{ backgroundColor: type === 'strikeThrough' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('strikeThrough') }}>
+                <StrikethroughS sx={{ color: 'white' }} />
+            </Button>
+            <Button style={{ backgroundColor: type === 'link' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('link') }}>
+                <LinkOutlined sx={{ color: 'white' }} />
+            </Button>
+            <Button style={{ backgroundColor: type === 'list' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('list') }}>
+                <List sx={{ color: 'white' }} />
+            </Button>
+            <Button style={{ backgroundColor: type === 'orderedList' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('orderedList') }} >
+                <FormatListNumberedOutlined sx={{ color: 'white' }} />
+            </Button>
+            <Button style={{ backgroundColor: type === 'blockQuote' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('blockQuote') }}>
+                <FormatQuote sx={{ color: 'white' }} />
+            </Button>
+            <Button style={{ backgroundColor: type === 'code' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('code') }}>
+                <Code sx={{ color: 'white' }} />
+            </Button>
+        </>
+    }
+
+    
 
 
 
@@ -45,43 +83,17 @@ const InputField = () => {
                     })}
                 </Modal>
                 <Modal onCancel={() => setModal(false)} footer={null} open={modal} title='File Upload'  >
-                    <Input onChange={(e)=>setFile(e.target.files[0])} type='file' />
+                    <Input onChange={(e) => setFile(e.target.files[0])} type='file' />
                     <div className='w-full flex space-x-3' >
-                        <button onClick={()=>handleFile(file)} className='bg-[--prm] text-white font-ubuntu px-2 py-1 rounded-md'
+                        <button onClick={() => handleFile(file)} className='bg-[--prm] text-white font-ubuntu px-2 py-1 rounded-md'
                         >Upload</button>
                         <button onClick={() => setModal(false)} className='text-[--prm] border-[--prm] border-[1.5px]  font-ubuntu px-2 py-1 rounded-md'
                         >Cancel</button>
                     </div>
                 </Modal>
 
+                    <InputButtons/>
 
-                <Button style={{ backgroundColor: type === 'text' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('text') }} >
-                    <TextFields sx={{ color: 'white' }} />
-                </Button>
-                <Button style={{ backgroundColor: type === 'bold' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('bold') }}>
-                    <FormatBold sx={{ color: 'white' }} />
-                </Button>
-                <Button style={{ backgroundColor: type === 'italics' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('italics') }}>
-                    <FormatItalic sx={{ color: 'white' }} />
-                </Button>
-                <Button style={{ backgroundColor: type === 'strikeThrough' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('strikeThrough') }}>
-                    <StrikethroughS sx={{ color: 'white' }} />
-                </Button>
-                <Button style={{ backgroundColor: type === 'link' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('link') }}>
-                    <LinkOutlined sx={{ color: 'white' }} />
-                </Button>
-                <Button style={{ backgroundColor: type === 'list' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('list') }}>
-                    <List sx={{ color: 'white' }} />
-                </Button>
-                <Button style={{ backgroundColor: type === 'orderedList' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('orderedList') }} >
-                    <FormatListNumberedOutlined sx={{ color: 'white' }} />
-                </Button>
-                <Button style={{ backgroundColor: type === 'blockQuote' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('blockQuote') }}>
-                    <FormatQuote sx={{ color: 'white' }} />
-                </Button>
-                <Button style={{ backgroundColor: type === 'code' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('code') }}>
-                    <Code sx={{ color: 'white' }} />
-                </Button>
                 <div className='flex w-[30%] flex-wrap justify-end '>
                     {tagged.map((t) => {
                         return <Tag onClose={() => handleClose(t)} className='flex font-bold text-md items-center my-1 justify-center  ' closable color='purple'>{t?.username}</Tag>
@@ -103,7 +115,7 @@ const InputField = () => {
                 <Button
                     disabled={input === '' ? true : false}
                     onClick={() => {
-                        sendMessage(_id, { sender:{username, email}, content: input, type, tagged })
+                        sendMessage(_id, { sender: { username, email }, content: input, type, tagged })
                         setInput('')
                     }}
                     style={{ backgroundColor: 'green' }} >

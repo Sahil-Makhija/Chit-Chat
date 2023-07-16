@@ -3,18 +3,19 @@ const User = require("../models/userModel")
 
 const createConversation = async (convo_data) => {
     const { members } = convo_data
-    return await findConversation({ members }).then((response) => {
-        if (response !== null) {
-            return { status: false, error: 'This Coversation already exist!' }
 
-        }
-        else {
-            return Conversation.create(convo_data).then((convo) => {
+    return await findConversation({ members }).then((response) => {
+        if (response?.status === false) {
+            return  Conversation.create(convo_data).then((convo) => {
                 return {
                     status: true,
                     conversation_id: convo._id.toHexString()
                 }
             }).catch((error) => { return { status: false, error: error.message } })
+            
+        }
+        else {
+            return { status: false, error: 'This Coversation already exist!' }
         }
     })
 
@@ -55,8 +56,10 @@ const sendRequest = async (data) => {
 const acceptRequest = async (data) => {
     try {
         const { accepted, sender, receiver } = data
+        // console.log(accepted, sender, receiver);
         if (accepted) {
             const { conversation_id } = await createConversation({ members: [sender, receiver], created_at: new Date().toLocaleString() })
+            console.log(conversation_id);
             await User.findOneAndUpdate({ email: sender.email }, { $push: { conversations: conversation_id } })
             await User.findOneAndUpdate({ email: receiver.email }, { $push: { conversations: conversation_id } })
         }
@@ -67,7 +70,7 @@ const acceptRequest = async (data) => {
             success: accepted ? 'friend Req accepted' : 'friend req denied'
         }
     } catch (error) {
-        console.log(e);
+        console.log(error);
         return ({
             status: false,
             error: 'Invalid data given!'

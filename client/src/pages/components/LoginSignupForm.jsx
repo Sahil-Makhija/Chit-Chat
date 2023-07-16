@@ -61,7 +61,7 @@ const LoginSignupForm = () => {
         </Item>)}
 
         <Item className='flex  justify-center' name={'email'}  >
-          <Input className='input-field-antd' spellCheck='false' autoComplete='off' placeholder='Email Address' />
+          <Input type='email' className='input-field-antd' spellCheck='false' autoComplete='off' placeholder='Email Address' />
         </Item>
         <Item className='w-[100%] h-full flex  justify-center' name={'password'}  >
           <Input  className='input-field-antd' type='password' placeholder='Password' />
