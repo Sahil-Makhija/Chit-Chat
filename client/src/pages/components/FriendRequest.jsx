@@ -78,7 +78,7 @@ const FriendRequest = ({ hidden }) => {
         }
     ]
     return (
-        <div hidden={hidden} className='p-2 fixed z-50  top-20 left-2 min-w-[30vw] min-h-[15vh] max-h-[100vh]    bg-[--sec] rounded-md'>
+        <div hidden={hidden} className='p-2 fixed z-50  top-20 left-2 min-w-[30vw] min-h-[15vh] max-h-[100vh]   border-4 bg-[--sec] border-[--prm] rounded-md'>
             <Tabs className='text-[--text-h]  ' centered size='large' items={items} defaultActiveKey='1' />
         </div>
     )

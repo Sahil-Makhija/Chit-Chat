@@ -26,23 +26,6 @@ app.use('/', userRoutes)
 app.use('/', messageRoutes)
 app.use('/', convoRoutes)
 
-
-// ----------------for Deployment ----------------
-
-// const path = require('path');
-// const __dirname1 = path.resolve();
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(path.join(__dirname1, "/build")));
-
-//   app.get("*", (req, res) =>
-//     res.sendFile(path.resolve(__dirname1, "build", "index.html"))
-//   );
-// } else {
-//   app.get("/", (req, res) => {
-//     res.send("API is running..");
-//   });
-// }
-
 const server = app.listen(PORT, () => {
   console.log(`** server initialised at : ${SERVER_URL}:${PORT}/ **`);
 })
@@ -67,7 +50,7 @@ app.use(fileUpload())
 
 io.on('connection', (socket) => {
 
-  socket.on('user-join', (room, userData) => {
+  socket.on('user-join', (room) => {
     socket.join(room)
   })
 
@@ -75,10 +58,11 @@ io.on('connection', (socket) => {
     socket.leave(room)
   })
 
-  socket.on('message', (room, msg) => {
-    io.to(room).emit('message', msg)
+  socket.on('message', ({room, msg}) => {
+    console.log(room);
+    io.to(room).emit('message', {msg,room})
     const {sender,content,type} = msg
-    Message.create({sender,content,conversation_id:room,type,timestamp:new Date().toLocaleString()})
+    // Message.create({sender,content,conversation_id:room,type,timestamp:new Date().toLocaleString()})
   })
 
 })

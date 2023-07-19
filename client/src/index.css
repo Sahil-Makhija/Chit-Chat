@@ -33,7 +33,7 @@
 }
 
 .contact-card{
-    @apply w-[100%] h-[100%] flex items-center p-1 space-x-3 bg-[--prm] border-b-[--sec] border-b-[1px] hover:bg-[--sec] hover:cursor-pointer
+    @apply w-[100%] h-[100%] flex items-center p-1 space-x-3  border-[--sec] border-b-[1px] border-t-[1px] hover:bg-[--sec] hover:cursor-pointer
 }
 
 .input-field-antd{

@@ -3,12 +3,12 @@ import { ENDPOINT } from './redux/actions/userActions'
 
 const socket = io(ENDPOINT)
 
-const joinUser = (room,userData)=>{
-    socket.emit('user-join',room,userData)
+const joinUser = (room)=>{
+    socket.emit('user-join',room)
 }
 
- const sendMessage = (room,msg)=>{
-    socket.emit('message',room,msg)
+const sendMessage = (room,msg)=>{
+    socket.emit('message',{room,msg})
 }
 
 const leaveRoom = (room)=>{

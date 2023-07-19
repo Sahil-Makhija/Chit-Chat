@@ -1,5 +1,5 @@
 import { Add, Group, Menu, Notifications, Search } from '@mui/icons-material'
-import { Badge, Button, Card, Skeleton } from '@mui/material'
+import { Badge, Button } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import Img from './Image'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,7 +8,8 @@ import { Drawer, Image } from 'antd'
 import skl_image from '../../assets/blank.webp'
 import FriendRequest from './FriendRequest'
 import { fetchConnections } from '../../redux/actions/userActions'
-import { leaveRoom } from '../../ChatConfig'
+import ContactCard from './ContactCard'
+import { joinUser } from '../../ChatConfig'
 
 
 const NavDrawer = () => {
@@ -17,9 +18,10 @@ const NavDrawer = () => {
     const [requests, setRequests] = useState(true)
     const [chats, setChats] = useState([])
     const { username, email, conversations } = useSelector(state => state.user)
-    const {_id} = useSelector(state=>state.chat)
+    const { notifications } = useSelector(state => state.app)
 
     useEffect(() => {
+
         const setConnections = async () => {
             await fetchConnections(conversations).then(({ connections }) => {
                 setChats([...connections.filter((c) => {
@@ -32,7 +34,6 @@ const NavDrawer = () => {
 
 
     const navigate = useNavigate()
-    const [loading,setLoading] = useState(false)
     return (
         <div className='nav-drawer'>
             <FriendRequest hidden={requests} />
@@ -50,7 +51,7 @@ const NavDrawer = () => {
                         <Group sx={{ color: 'white' }} />
                     </Button>
                     <Button>
-                        <Badge badgeContent={0} color='primary' >
+                        <Badge badgeContent={notifications} color='primary' >
                             <Notifications sx={{ color: 'white' }} />
                         </Badge>
                     </Button>
@@ -90,32 +91,7 @@ const NavDrawer = () => {
                     :
                     chats?.map((chat) => {
                         if (chat?.status === false) { return null }
-                        return (<Card onClick={() => {
-                            if(_id){
-                                leaveRoom(_id)
-                            }
-                            dispatch({
-                                type: 'SELECT_CHAT',
-                                payload: { ...chat, username, email,chatName: (chat?.members.filter((m)=>{
-                                    return true ? m.email !== email :false
-                                })[0]?.username) }
-                            })
-                        }} variant='rectangular' className='my-1  w-[100%] h-[10vmin] rounded-none'>
-                            {loading && (<Skeleton width={'100%'} height={'100%'} variant='rounded' />)}
-                            {!loading && (
-                                <div className='contact-card '>
-                                    <Badge badgeContent={0} color='success'>
-                                        <Img />
-                                    </Badge>
-                                    <div className="flex flex-col  ">
-                                        <h2 className='text-[--text-h]'>{chat?.GroupName || (chat?.members.filter((m)=>{
-                                    return true ? m.email !== email :false
-                                })[0]?.username)}</h2>
-                                        <span className='text-[2vmin] text-[--text] ' >{chat?.lastMessage || null}</span>
-                                    </div>
-                                </div>
-                            )}
-                        </Card>)
+                        return (<ContactCard chat={chat} />)
                     })}
             </div>
         </div>

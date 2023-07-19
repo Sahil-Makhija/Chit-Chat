@@ -8,13 +8,15 @@ const userReducer = createReducer(
     {
         LOGIN:(state,action)=>{
             return{
+                ...state,
                 ...action.payload,
                 isLoggedIn:true
             }
         },
-        LOGOUT:()=>{
+        LOGOUT:(state)=>{
             Cookies.set('token',null)
             return{
+                ...state,
                 isLoggedIn:false
             }
         }
