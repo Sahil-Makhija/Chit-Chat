@@ -7,10 +7,10 @@ const chatReducer = createReducer(
     },
     {
         SELECT_CHAT:(state,action)=>{
-            return {...state,isChatSelected:true,...action.payload}
+            return {isChatSelected:true,...action.payload}
         },
-        DESELECT_CHAT:(state)=>{
-            return {...state,isChatSelected:false}
+        DESELECT_CHAT:()=>{
+            return {isChatSelected:false}
         }
     }
 )

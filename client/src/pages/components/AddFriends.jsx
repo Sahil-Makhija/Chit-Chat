@@ -1,5 +1,5 @@
-import { Add, Close } from '@mui/icons-material'
-import { Button, message } from 'antd'
+import { Add, Close } from '../icons'
+import {Button,message} from '../ExtComponents'
 import React, { useState } from 'react'
 import { handleFindFriends, sendFriendRequest } from '../../redux/actions/userActions'
 import {  useSelector } from 'react-redux'

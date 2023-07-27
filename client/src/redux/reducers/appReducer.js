@@ -3,7 +3,7 @@ import { createReducer } from "@reduxjs/toolkit";
 const appReducer = createReducer(
     {
         isLoading: false,
-        notifications:0
+        notifications:[]
     },
     {
         NOW_LOADING: (state) => {
@@ -20,7 +20,7 @@ const appReducer = createReducer(
         },
         NEW_NOTIFICATION:(state,action)=>{
             const {notifications} = state
-            return {...state,notifications:notifications+1}
+            return {...state,notifications:[...notifications,action.payload]}
         }
     },
 

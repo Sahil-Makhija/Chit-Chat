@@ -1,9 +1,7 @@
-import { Button, Card } from '@mui/material'
-import { Tabs, Tooltip } from 'antd'
+import { Button, Card,Tabs, Tooltip,Img } from '../ExtComponents'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Img from './Image'
-import { Check, Close } from '@mui/icons-material'
+import {Check , Close} from '../icons'
 import { handleRequest, login } from '../../redux/actions/userActions'
 import Cookies from 'js-cookie'
 

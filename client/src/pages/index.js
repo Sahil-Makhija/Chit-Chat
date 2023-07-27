@@ -8,6 +8,9 @@ export {default as IndexScreen} from './components/IndexScreen'
 export {default as RecdMsg} from './components/RecdMsg'
 export {default as SenderMsg} from './components/SenderMsg'
 export {default as InputField} from './components/InputField'
+export {default as ContactCard} from './components/ContactCard'
+export {default as FriendRequest} from './components/FriendRequest'
+
 
 
 

@@ -1,15 +1,11 @@
-import { Add, Group, Menu, Notifications, Search } from '@mui/icons-material'
-import { Badge, Button } from '@mui/material'
+import { Add, Group, Menu, Notifications, Search,skl_image } from '../icons'
+import { Badge, Button,Img,Drawer,Image} from '../ExtComponents'
+import {FriendRequest,ContactCard} from '../../pages'
+
 import React, { useEffect, useState } from 'react'
-import Img from './Image'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { Drawer, Image } from 'antd'
-import skl_image from '../../assets/blank.webp'
-import FriendRequest from './FriendRequest'
-import { fetchConnections } from '../../redux/actions/userActions'
-import ContactCard from './ContactCard'
-import { joinUser } from '../../ChatConfig'
+import { fetchConnections } from '../../redux/actions/userActions' 
 
 
 const NavDrawer = () => {
@@ -51,7 +47,7 @@ const NavDrawer = () => {
                         <Group sx={{ color: 'white' }} />
                     </Button>
                     <Button>
-                        <Badge badgeContent={notifications} color='primary' >
+                        <Badge badgeContent={notifications?.length} color='primary' >
                             <Notifications sx={{ color: 'white' }} />
                         </Badge>
                     </Button>

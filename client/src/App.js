@@ -8,7 +8,7 @@ import Cookies from 'js-cookie'
 const App = () => {
   const dispatch = useDispatch()
   const { isLoggedIn } = useSelector(state => state.user)
-  const { isChatSelected } = useSelector(state => state.chat)
+  const { isChatSelected  } = useSelector(state => state.chat)
 
   const token = Cookies.get('token')
   useEffect(()=>{

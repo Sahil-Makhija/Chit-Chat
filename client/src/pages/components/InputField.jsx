@@ -1,10 +1,8 @@
-import { Add, Code, EmojiEmotionsOutlined, FormatItalic, FormatListNumberedOutlined, FormatQuote, LinkOutlined, List, Send, StrikethroughS, FormatBold, TextFields, AlternateEmail } from '@mui/icons-material';
-import { Button } from '@mui/material'
+import {Add, Code, EmojiEmotionsOutlined, FormatItalic, FormatListNumberedOutlined, FormatQuote, LinkOutlined, List, Send, StrikethroughS, FormatBold, TextFields, AlternateEmail } from '../icons'
 import React, { useState } from 'react'
-import { sendMessage } from '../../ChatConfig';
+import { isTyping, sendMessage, stopTyping } from '../../ChatConfig';
 import { useSelector } from 'react-redux';
-import { Input, Modal, Tag } from 'antd';
-import Img from './Image'
+import { Input, Modal, Tag,Button,Img } from '../ExtComponents';
 import { handleFile } from '../../redux/actions/userActions';
 
 
@@ -114,8 +112,16 @@ const InputField = () => {
                 </div>
                 <Button
                     disabled={input === '' ? true : false}
+                    onChange={(e)=>{
+                        if (e.target.value === ""){
+                            stopTyping({room:_id,username})
+                        }
+                        setTimeout(() => {
+                            isTyping({room:_id,username})
+                        }, 300);
+                    }}
                     onClick={() => {
-                        sendMessage(_id, { sender: { username, email }, content: input, type, tagged })
+                        sendMessage(_id, { sender: { username, email }, content: input, type, tagged,conversation_id:_id })
                         setInput('')
                     }}
                     style={{ backgroundColor: 'green' }} >

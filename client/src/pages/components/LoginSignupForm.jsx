@@ -1,6 +1,6 @@
 import { Tab, Tabs } from '@mui/material'
 import React, { useState } from 'react'
-import { Form, Input, message } from 'antd'
+import { Form, Input, message } from '../ExtComponents'
 import { login, signUp } from '../../redux/actions/userActions';
 import { useDispatch } from 'react-redux';
 

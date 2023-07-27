@@ -15,4 +15,12 @@ const leaveRoom = (room)=>{
     socket.emit('user-left',room)
 }
 
-export {socket, joinUser , sendMessage,leaveRoom}
+const isTyping = ({room,username})=>{
+    socket.emit('user-typing',{room,username})
+}
+
+const stopTyping = ({room,username})=>{
+    socket.emit('user-stopTyping',{room,username})
+}
+
+export {socket, joinUser , sendMessage,leaveRoom , isTyping,stopTyping}
