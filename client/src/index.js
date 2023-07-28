@@ -9,10 +9,6 @@ import { AddFriends, MessageSpace } from './pages';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const mobile = {
-  path:'/user/chat',
-  element:<MessageSpace/>
-}
 
 
 const router = createBrowserRouter([
