@@ -38,8 +38,8 @@ const LoginSignupForm = () => {
         }
         else{handleSignUp(values)}
       }
-        } className='w-[80%] bg-[--sec] min-h-[60%] rounded-2xl flex flex-col items-center shadow-lg shadow-gray-700 space-y-7 p-2' >
-      <h2 className='text-[6vmin] font-bold text-[--text]' >{value}</h2>
+        } className='w-[90%] bg-[--sec] py-10 rounded-2xl flex flex-col items-center shadow-lg shadow-gray-700 space-y-8 p-2' >
+      <h2 className='text-3xl font-bold text-[--text]' >{value}</h2>
 
         <Tabs
           sx={{ width: '100%', color: 'var(--text)', }}
@@ -66,7 +66,7 @@ const LoginSignupForm = () => {
         <Item className='w-[100%] h-full flex  justify-center' name={'password'}  >
           <Input  className='input-field-antd' type='password' placeholder='Password' />
         </Item>
-        <button type='submit'  className=' text-[--text-h] text-[2.5vmin] rounded-[50px] bg-[--prm] w-[40%] p-3'>{value}</button>
+        <button type='submit'  className=' text-[--text-h] text-xl rounded-[50px] bg-[--prm] w-[40%] p-3'>{value}</button>
       </Form>
 
     </section>

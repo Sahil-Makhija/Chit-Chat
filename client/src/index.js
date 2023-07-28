@@ -5,9 +5,15 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { AddFriends } from './pages';
+import { AddFriends, MessageSpace } from './pages';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const mobile = {
+  path:'/user/chat',
+  element:<MessageSpace/>
+}
+
 
 const router = createBrowserRouter([
   {
@@ -17,9 +23,14 @@ const router = createBrowserRouter([
       {
         path: '/user/find',
         element: <AddFriends />
+      },
+      {
+        path:'/user/chat',
+        element:<MessageSpace/>
       }
     ]
-  }
+  },
+  
 ])
 
 root.render(

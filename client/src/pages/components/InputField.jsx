@@ -1,8 +1,8 @@
-import {Add, Code, EmojiEmotionsOutlined, FormatItalic, FormatListNumberedOutlined, FormatQuote, LinkOutlined, List, Send, StrikethroughS, FormatBold, TextFields, AlternateEmail } from '../icons'
+import { Add, Code, EmojiEmotionsOutlined, FormatItalic, FormatListNumberedOutlined, FormatQuote, LinkOutlined, List, Send, StrikethroughS, FormatBold, TextFields } from '../icons'
 import React, { useState } from 'react'
 import { isTyping, sendMessage, stopTyping } from '../../ChatConfig';
 import { useSelector } from 'react-redux';
-import { Input, Modal, Tag,Button,Img } from '../ExtComponents';
+import { Input, Modal, Button } from '../ExtComponents';
 import { handleFile } from '../../redux/actions/userActions';
 
 
@@ -13,16 +13,15 @@ const InputField = () => {
     const [input, setInput] = useState('')
     const [modal, setModal] = useState(false)
     const [tagged, setTagged] = useState([])
-    const [membersModal, setMembersModal] = useState(false)
     const [file, setFile] = useState(null)
-    const [type,setType] =useState('text')
+    const [type, setType] = useState('text')
 
     const { username, email } = useSelector(state => state.user)
     const { _id, members } = useSelector(state => state.chat)
 
     const InputButtons = () => {
-    
-        return <>
+
+        return <div className='flex space-x-2 overflow-y-hidden overflow-x-scroll'>
             <Button style={{ backgroundColor: type === 'text' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('text') }} >
                 <TextFields sx={{ color: 'white' }} />
             </Button>
@@ -50,36 +49,15 @@ const InputField = () => {
             <Button style={{ backgroundColor: type === 'code' ? 'var(--prm)' : 'inherit' }} onClick={() => { setType('code') }}>
                 <Code sx={{ color: 'white' }} />
             </Button>
-        </>
+        </div>
     }
 
-    
-
-
-
-    const handleClose = (removedTag) => {
-        const newTags = tagged.filter((tag) => tag !== removedTag);
-        console.log(newTags);
-        setTagged(newTags);
-    }
 
     return (
-        <div className='min-h-[14vmin]  w-[100%] bg-[--sec] absolute bottom-0 flex flex-col justify-evenly  items-center py-2  ' >
-            <div className="w-full flex space-x-3 ">
+        <div className=' w-full rounded-lg   bg-[--sec]  flex flex-col justify-evenly  items-center p-2 absolute bottom-2 ' >
+            <div className="w-[100%] flex space-x-3 ">
 
-                <Modal title='Members' onCancel={() => setMembersModal(false)} open={membersModal} footer={null} >
-                    {members?.map((m, i) => {
-                        return (
-                            <div onClick={() => setTagged([...tagged, m])} className='contact-card h-[10vmin] max-h-[10vmin] my-1  rounded-lg '>
-                                <Img />
-                                <div className="flex flex-col  ">
-                                    <h2 className='text-[--text-h]'>{m.username || `User ${i + 1}`}</h2>
-                                    <span className='text-[2vmin] text-[--text] ' >{m.email || null}</span>
-                                </div>
-                            </div>
-                        )
-                    })}
-                </Modal>
+
                 <Modal onCancel={() => setModal(false)} footer={null} open={modal} title='File Upload'  >
                     <Input onChange={(e) => setFile(e.target.files[0])} type='file' />
                     <div className='w-full flex space-x-3' >
@@ -90,38 +68,31 @@ const InputField = () => {
                     </div>
                 </Modal>
 
-                    <InputButtons/>
+                <InputButtons />
 
-                <div className='flex w-[30%] flex-wrap justify-end '>
-                    {tagged.map((t) => {
-                        return <Tag onClose={() => handleClose(t)} className='flex font-bold text-md items-center my-1 justify-center  ' closable color='purple'>{t?.username}</Tag>
-                    })}
-                </div>
+
 
             </div>
-            <textarea value={input} onChange={(e) => setInput(e.target.value)} spellCheck='false' className='bg-inherit my-1  placeholder:text-[--text] focus:outline-none text-white px-5 min-h-[5vmin]  w-full ' placeholder='Chat comes here...' />
+            <textarea value={input} onChange={(e) => setInput(e.target.value)} spellCheck='false' className=' bg-inherit my-1  placeholder:text-[--text] focus:outline-none text-white px-5 min-h-[5vmin]  w-full ' placeholder='Chat comes here...' />
             <div className="w-full flex justify-between ">
                 <div className='flex space-x-2'>
                     <Button onClick={() => { setModal(true) }} ><Add sx={{ color: 'white' }} /></Button>
                     <Button  >
                         <EmojiEmotionsOutlined sx={{ color: 'white' }} />
                     </Button>
-                    <Button onClick={() => setMembersModal(true)}>
-                        <AlternateEmail sx={{ color: 'white' }} />
-                    </Button>
                 </div>
                 <Button
                     disabled={input === '' ? true : false}
-                    onChange={(e)=>{
-                        if (e.target.value === ""){
-                            stopTyping({room:_id,username})
+                    onChange={(e) => {
+                        if (e.target.value === "") {
+                            stopTyping({ room: _id, username })
                         }
                         setTimeout(() => {
-                            isTyping({room:_id,username})
+                            isTyping({ room: _id, username })
                         }, 300);
                     }}
                     onClick={() => {
-                        sendMessage(_id, { sender: { username, email }, content: input, type, tagged,conversation_id:_id })
+                        sendMessage(_id, { sender: { username, email }, content: input, type, tagged, conversation_id: _id })
                         setInput('')
                     }}
                     style={{ backgroundColor: 'green' }} >
