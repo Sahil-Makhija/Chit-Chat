@@ -54,7 +54,7 @@ const InputField = () => {
 
 
     return (
-        <div className=' w-full rounded-lg   bg-[--sec]  flex flex-col justify-evenly  items-center p-2 absolute bottom-2 ' >
+        <div className='  w-full rounded-lg   bg-[--sec]  flex flex-col justify-evenly  items-center p-2 absolute bottom-2 ' >
             <div className="w-[100%] flex space-x-3 ">
 
 
@@ -81,7 +81,8 @@ const InputField = () => {
                         <EmojiEmotionsOutlined sx={{ color: 'white' }} />
                     </Button>
                 </div>
-                <Button
+                <button
+                    className='rounded-[50%] h-10 flex items-center justify-center absolute -top-12 right-0 w-10 '
                     disabled={input === '' ? true : false}
                     onChange={(e) => {
                         if (e.target.value === "") {
@@ -97,7 +98,7 @@ const InputField = () => {
                     }}
                     style={{ backgroundColor: 'green' }} >
                     <Send sx={{ color: 'white' }} />
-                </Button>
+                </button>
             </div>
         </div>
     )

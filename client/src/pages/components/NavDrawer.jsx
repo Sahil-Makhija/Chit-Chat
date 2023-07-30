@@ -36,7 +36,7 @@ const NavDrawer = () => {
             <div className='flex justify-between items-center m-2  ' >
                 <div className='flex items-center space-x-3'>
                     <Img />
-                    <h2 className='text-lg' >{username}</h2>
+                    <h2 className='text-[1rem]' >{username}</h2>
 
                 </div>
                 <div className='flex  '>

@@ -44,7 +44,7 @@ const MessageSpace = () => {
     }, [incomingMessage])
     return (
         <>
-            <section className={'message-space fixed right-0 ' }>
+            <section className={'message-space animate-slideright fixed right-0 ' }>
                 <div className='w-[99%] h-[98%] bg-[--prm] flex flex-col  p-2 items-center  space-y-2 relative'>
                     <nav className=' h-16 w-[100%] bg-[--sec] flex p-3 items-center justify-between rounded-lg '  >
                         <div className='bg-[--sec] flex justify-between items-center space-x-3'>

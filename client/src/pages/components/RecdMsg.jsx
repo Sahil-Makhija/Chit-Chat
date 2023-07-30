@@ -37,7 +37,7 @@ const RecdMsg = ({ msg }) => {
         }
     }
     return (
-        <div className='w-full min-h-[25px] flex  justify-start p-2' >
+        <div className='w-full min-h-[25px] flex  justify-start p-2 animate-slidedown ' >
             <div className='  bg-[--sec] flex flex-col overflow-hidden  text-white text-xl rounded-md p-1'>
                 <h3 className='bg-inherit text-xs w-full text-left'>{username || sender?.username}</h3>
                 {displayMsg()}

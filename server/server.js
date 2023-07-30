@@ -7,11 +7,6 @@ const { PORT, SERVER_URL, FRONTEND_URL } = process.env
 const cloudinary = require('cloudinary');
 const Message = require('./models/messageModel');
 
-cloudinary.config({
-  cloud_name: 'dlkti7osi',
-  api_key: '548216667555433',
-  api_secret: 'cxsRST_gEzei9RJkPjw_r4BoASY'
-});
 
 connectToDatabase()
 const app = express()
@@ -61,7 +56,7 @@ io.on('connection', (socket) => {
   socket.on('message', ({room, msg}) => {
     io.to(room).emit('message', msg)
     const {sender,content,type,conversation_id} = msg
-    // Message.create({sender,content,conversation_id,type,timestamp:new Date().toLocaleString()})
+    Message.create({sender,content,conversation_id,type,timestamp:new Date().toLocaleString()})
   })
 
 })

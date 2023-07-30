@@ -40,7 +40,7 @@ const SenderMsg = ({ msg }) => {
     }
 
     return (
-        <div className='w-full min-h-[25px] flex justify-end p-2' >
+        <div className='w-full min-h-[25px] flex justify-end p-2 animate-slideup ' >
             <div className=' relative bg-[--sec] max-w-[55%]  text-white text-xl rounded-md p-1'>
                 <h3 className='bg-inherit text-xs w-full text-right'>Me</h3>
                 {(displayMsg())}

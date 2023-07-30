@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NavDrawer, MessageSpace, LoginSignupForm, IndexScreen } from './pages'
+import { NavDrawer, LoginSignupForm, IndexScreen } from './pages'
 import { useDispatch, useSelector } from 'react-redux'
 import { Outlet } from 'react-router-dom'
 import { login } from './redux/actions/userActions'
@@ -33,7 +33,7 @@ const App = () => {
         dispatch({ type: "NEW_MESSAGE", payload: incomingMessage })
       }
     }
-  }, [incomingMessage,_id,api,dispatch])
+  }, [incomingMessage])
   const { isLoggedIn } = useSelector(state => state.user)
   const { isChatSelected } = useSelector(state => state.chat)
 
