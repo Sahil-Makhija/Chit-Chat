@@ -55,9 +55,9 @@ const FriendRequest = ({ hidden }) => {
             key: 1,
             label: 'Requests Sent',
             children:
-                req_sent.length > 0 ? req_sent.map((r) => {
+                req_sent.length > 0 ? req_sent.map((r,i) => {
                     return (
-                        <Card variant='rectangular' style={{ backgroundColor: 'var(--prm)', color: 'var(--text-h)' }} className='flex items-center justify-center w-[100%] h-[10vmin] rounded-none space-x-1'>
+                        <Card key={i} variant='rectangular' style={{ backgroundColor: 'var(--prm)', color: 'var(--text-h)' }} className='flex items-center justify-center w-[100%] h-[10vmin] rounded-none space-x-1'>
                             <span > You sent a friend request to</span> <h1 className='font-bold'>{' ' + r.username}</h1>
                         </Card>
                     )
@@ -69,8 +69,8 @@ const FriendRequest = ({ hidden }) => {
             key: 2,
             label: 'Requests Received',
             children:
-                req_recd?.length > 0 ? req_recd.map((m) => {
-                    return <RequestCard m={m} />
+                req_recd?.length > 0 ? req_recd.map((m,i) => {
+                    return <RequestCard key={i} m={m} />
                 }) :
                     <Nothing />
         }

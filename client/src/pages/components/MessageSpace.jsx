@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Menu, skl_image } from '../icons'
 import { Button, Card, Drawer, Image, Img } from '../ExtComponents'
 import { useSelector } from 'react-redux'
-import { SenderMsg, RecdMsg, InputField } from '../../pages'
+import { SenderMsg, RecdMsg, InputField, ContactCard } from '../../pages'
 import { fetchMessages } from '../../redux/actions/userActions'
 import { socket } from '../../ChatConfig'
 
@@ -62,12 +62,12 @@ const MessageSpace = () => {
                         </div>
                     </nav>
                     <div className='  w-full  p-1 rounded-lg overflow-y-scroll' >
-                        {messages.map((m) => {
+                        {messages.map((m,i) => {
                             if (m?.sender?.email === email) {
-                                return <SenderMsg msg={m} />
+                                return <SenderMsg key={i} msg={m} />
                             }
                             else {
-                                return <RecdMsg msg={m} />
+                                return <RecdMsg key={i} msg={m} />
                             }
                         })}
                     </div>
@@ -85,15 +85,7 @@ const MessageSpace = () => {
                             <ul >
                                 {members.map((m, i) => {
                                     return (
-                                        <Card key={i} variant='rectangular' style={{ backgroundColor: 'inherit' }} className='   w-[100%] h-[10vmin] rounded-none'>
-                                            <div className='contact-card  '>
-                                                <Img />
-                                                <div className="flex flex-col  ">
-                                                    <h2 className='text-[--text-h]'>{m.username || `User ${i + 1}`}</h2>
-                                                    <span className='text-[2vmin] text-[--text] ' >{m.email || null}</span>
-                                                </div>
-                                            </div>
-                                        </Card>
+                                        <ContactCard chat={m} />
                                     )
                                 })}
                             </ul>

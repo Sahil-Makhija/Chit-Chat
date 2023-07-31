@@ -1,9 +1,10 @@
-import { Add, Code, EmojiEmotionsOutlined, FormatItalic, FormatListNumberedOutlined, FormatQuote, LinkOutlined, List, Send, StrikethroughS, FormatBold, TextFields } from '../icons'
+import { Code, EmojiEmotionsOutlined, FormatItalic, FormatListNumberedOutlined, FormatQuote, LinkOutlined, List, Send, StrikethroughS, FormatBold, TextFields } from '../icons'
 import React, { useState } from 'react'
 import { isTyping, sendMessage, stopTyping } from '../../ChatConfig';
 import { useSelector } from 'react-redux';
 import { Input, Modal, Button } from '../ExtComponents';
 import { handleFile } from '../../redux/actions/userActions';
+import { AttachFile, Image } from '@mui/icons-material';
 
 
 
@@ -52,37 +53,54 @@ const InputField = () => {
         </div>
     }
 
+    const FileUpload = () => {
+        return <Modal onCancel={() => setModal(false)} footer={null} open={modal} title='File Upload'  >
+            <Input onChange={(e) => setFile(e.target.files[0])} type='file' />
+            <div className='w-full flex space-x-3 my-2 ' >
+                <button onClick={() => handleFile(file)} className='bg-[--prm] text-white font-ubuntu px-2 py-1 rounded-md'
+                >Upload</button>
+                <button onClick={() => setModal(false)} className='text-[--prm] border-[--prm] border-[1.5px]  font-ubuntu px-2 py-1 rounded-md'
+                >Cancel</button>
+            </div>
+        </Modal>
+    }
+
 
     return (
-        <div className='  w-full rounded-lg   bg-[--sec]  flex flex-col justify-evenly  items-center p-2 absolute bottom-2 ' >
-            <div className="w-[100%] flex space-x-3 ">
-
-
-                <Modal onCancel={() => setModal(false)} footer={null} open={modal} title='File Upload'  >
-                    <Input onChange={(e) => setFile(e.target.files[0])} type='file' />
-                    <div className='w-full flex space-x-3' >
-                        <button onClick={() => handleFile(file)} className='bg-[--prm] text-white font-ubuntu px-2 py-1 rounded-md'
-                        >Upload</button>
-                        <button onClick={() => setModal(false)} className='text-[--prm] border-[--prm] border-[1.5px]  font-ubuntu px-2 py-1 rounded-md'
-                        >Cancel</button>
-                    </div>
-                </Modal>
-
-                <InputButtons />
-
-
-
+        <div className='  w-full  space-y-1  flex flex-col  justify-evenly  absolute bottom-2 ' >
+            <FileUpload />
+            <div className='flex'>
+                <Button onClick={() => { setModal(true) }} >
+                    <AttachFile sx={{ color: 'white' }} /></Button>
+                <Button className='relative w-8 overflow-hidden ' >
+                    <input
+                        onChange={(e) => {
+                            console.log(e.target.files[0]);
+                            // setInput(e.target.value)
+                            // setType('image')
+                        }} 
+                        accept="image/png, image/jpeg" 
+                        type="file" 
+                        className='absolute left-0 opacity-0 ' />
+                    <Image sx={{ color: 'white' }} />
+                </Button>
             </div>
-            <textarea value={input} onChange={(e) => setInput(e.target.value)} spellCheck='false' className=' bg-inherit my-1  placeholder:text-[--text] focus:outline-none text-white px-5 min-h-[5vmin]  w-full ' placeholder='Chat comes here...' />
-            <div className="w-full flex justify-between ">
-                <div className='flex space-x-2'>
-                    <Button onClick={() => { setModal(true) }} ><Add sx={{ color: 'white' }} /></Button>
+            <div className='flex space-x-2' >
+                <div className='bg-[--sec] w-full rounded-full flex items-center overflow-x-hidden h-10'>
                     <Button  >
                         <EmojiEmotionsOutlined sx={{ color: 'white' }} />
                     </Button>
+                    <textarea
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        spellCheck='false'
+                        className=' bg-inherit p-2 rounded-full focus:outline-none text-[--text-h] h-full  w-full '
+                        placeholder='Chat comes here...'
+                    />
+
                 </div>
                 <button
-                    className='rounded-[50%] h-10 flex items-center justify-center absolute -top-12 right-0 w-10 '
+                    className='rounded-[50%] h-10 flex items-center justify-center  -top-12 right-0 w-10 '
                     disabled={input === '' ? true : false}
                     onChange={(e) => {
                         if (e.target.value === "") {
@@ -100,6 +118,9 @@ const InputField = () => {
                     <Send sx={{ color: 'white' }} />
                 </button>
             </div>
+
+
+
         </div>
     )
 }

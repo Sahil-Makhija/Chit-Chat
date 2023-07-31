@@ -2,12 +2,12 @@ import DOMPurify from 'dompurify';
 import React from 'react'
 
 const SenderMsg = ({ msg }) => {
-    const { content, inputType } = msg
+    const { content, type } = msg
 
     
 
     let displayMsg = () => {
-        switch (inputType) {
+        switch (type) {
             case 'bold':
                 return <strong>{content}</strong>
             case 'italics':

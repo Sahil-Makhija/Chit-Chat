@@ -14,10 +14,10 @@ const NavDrawer = () => {
     const [requests, setRequests] = useState(true)
     const [chats, setChats] = useState([])
     const { username, email, conversations } = useSelector(state => state.user)
-    const { notifications } = useSelector(state => state.app)
+    const { notifications,isLoading } = useSelector(state => state.app)
 
     useEffect(() => {
-
+        dispatch({type:"NOW_LOADING"})
         const setConnections = async () => {
             await fetchConnections(conversations).then(({ connections }) => {
                 setChats([...connections.filter((c) => {
@@ -26,6 +26,7 @@ const NavDrawer = () => {
             })
         }
         setConnections()
+        dispatch({type:"STOP_LOADING"})
     }, [conversations])
 
 
@@ -78,7 +79,9 @@ const NavDrawer = () => {
                 <input spellCheck='false' className='bg-transparent placeholder:text-[--text] focus:outline-none text-white p-2 h-[80%]' autoCorrect='off' placeholder='search' />
             </div>
             <div className='overflow-y-scroll flex flex-col items-center justify-center '>
-                {chats?.length === 0 ?
+                {isLoading ? [1,2,3,4,5,6,7,8].map((e)=>{
+                    return <div className='w-full ' > <ContactCard key={e} loading /></div>
+                }):chats?.length === 0 ?
                     <div className='flex flex-col space-y-5'>
                         <h1 className='text-[--text] text-xl '>You have 0 connections</h1>
                         <Button onClick={() => navigate('/user/find')} >
@@ -87,9 +90,9 @@ const NavDrawer = () => {
                         </Button>
                     </div>
                     :
-                    chats?.map((chat) => {
+                    chats?.map((chat,index) => {
                         if (chat?.status === false) { return null }
-                        return (<ContactCard chat={chat} />)
+                        return (<ContactCard key={index} chat={chat} />)
                     })}
             </div>
         </div>

@@ -47,9 +47,9 @@ const AddFriends = () => {
         </div>
         <div className='w-full h-[3vmin] bg-[--text] ' ></div>
         {
-          friends?.map((friend) => {
+          friends?.map((friend,index) => {
             return (
-              <div className='w-full p-1 min-h-[8vmin] bg-[--sec] border-b-[2px] border-[--text] flex items-center justify-evenly  ' >
+              <div key={index} className='w-full p-1 min-h-[8vmin] bg-[--sec] border-b-[2px] border-[--text] flex items-center justify-evenly  ' >
                 <div className='w-[70%] '>
                   <h2 className='font-bold text-[3vmin] text-[--text-h]' >{friend.username}</h2>
                   <h3 className='text-[2vmin] text-[--text] mx-3'>{friend.email}</h3>

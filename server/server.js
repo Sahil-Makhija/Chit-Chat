@@ -56,7 +56,7 @@ io.on('connection', (socket) => {
   socket.on('message', ({room, msg}) => {
     io.to(room).emit('message', msg)
     const {sender,content,type,conversation_id} = msg
-    Message.create({sender,content,conversation_id,type,timestamp:new Date().toLocaleString()})
+    // Message.create({sender,content,conversation_id,type,timestamp:new Date().toLocaleString()})
   })
 
 })

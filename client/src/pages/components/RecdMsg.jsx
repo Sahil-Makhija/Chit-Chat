@@ -1,4 +1,3 @@
-import DOMPurify from 'dompurify'
 import React from 'react'
 
 const RecdMsg = ({ msg }) => {
@@ -17,15 +16,15 @@ const RecdMsg = ({ msg }) => {
             case 'list':
                 const listItems = content.split('\n')
                 return (<ul className='  ' >
-                    {listItems?.map((i)=>{
-                        return <li>{i}</li>
+                    {listItems?.map((item,index)=>{
+                        return <li key={index}>{item}</li>
                     })}
                 </ul>)
             case 'orderedList':
                 const orderedListItems = content.split('\n')
                 return (<ol className='  ' >
-                    {orderedListItems?.map((i)=>{
-                        return <li>{DOMPurify.sanitize(i)}</li>
+                    {orderedListItems?.map((item,index)=>{
+                        return <li key={index} >{item}</li>
                     })}
                 </ol>)
             case 'blockQuote':

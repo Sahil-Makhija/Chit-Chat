@@ -105,3 +105,13 @@ export const handleRequest = async(data) =>{
         return error
     })
 }
+
+export const pingServer = async (dispatch) => {
+    dispatch({ type: 'NOW_LOADING' })
+    await axios.get(ENDPOINT, { timeout: 60000 }).then((response) => {
+        console.log(response?.data);
+    }).catch((error)=>{console.log(error);})
+    dispatch({ type: 'STOP_LOADING' })
+  }
+
+// pingServer()
